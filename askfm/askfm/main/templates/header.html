@@ -1,0 +1,12 @@
+
+<header class="header-wrapper">
+  <nav class="nav-wrapper">
+    <a href="#">Home</a>
+    <a href="{% url 'question_list' %}">Questions</a>
+    <a href="{% url 'homepage' user.username %}">Profile</a>
+    <a href="{% url 'friends' %}">Friends</a>
+    <a href="#">Notifications</a>
+    <a href="#">Settings</a>
+    <a class="logout" href="{% url 'logout'%}">Logout</a>
+  </nav>
+</header>

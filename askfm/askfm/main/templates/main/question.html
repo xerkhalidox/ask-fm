@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %} {% load ret_username%}
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'main/question.css' %}" />
+    <title>Questions | ASKfm</title>
+  </head>
+
+  <body>
+    {% include "header.html" %}
+    <div class="container">
+      <section class="question-section">
+        <div class="inline-display">
+          <p>Questions</p>
+          <p id="question-nums">{{ count }}</p>
+        </div>
+
+        {% for que in ques%}
+
+        <section class="question">
+          <div class="inline-display">
+            <p>{{ que.question }}</p>
+            {% if que.is_anon != True %}
+            <a href="#">{{que.user_asks_id|ret_username}}</a> {% endif %}
+          </div>
+          <div class="inline-display">
+            <form action="{% url 'delete_question' que.id %}" method="get">
+              {% csrf_token %}
+              <button>Delete</button>
+            </form>
+            <a href="{% url 'answer_question' que.id %}" id="answer">Answer</a>
+          </div>
+        </section>
+
+        {% endfor %}
+      </section>
+    </div>
+  </body>
+</html>

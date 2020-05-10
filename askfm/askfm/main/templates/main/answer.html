@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Answer | ASKfm</title>
+    <link rel="stylesheet" href="{% static 'main/answerstyle.css' %}" />
+  </head>
+  <body>
+    {% include "header.html" %}
+    <div class="container">
+      <section>
+        <p>َ{{question.question}}</p>
+        <form action="{% url 'answer_question' question.id%}" method="post">
+          {% csrf_token %}
+          <textarea placeholder="Answer" name="answer"></textarea>
+          <br />
+          <button type="submit">Answer</button>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{User.username}}</title>
+    <link rel="stylesheet" href="{% static 'main/homepagestyle.css' %}" ">
+</head>
+
+<body>
+    {% include "header.html" %}
+    <div class="container">
+        <section class="profile-info">
+            <div class="avatar">
+                <a href="test.png" target="_blank">
+                    <img width="100" height="100" class="avatar" src="test.png" alt="">
+                </a>
+            </div>
+            <div class="avatar-username">
+                <p class="username">{{User.username}}</p>
+                <p class="name">{{User.username}}</p>
+                {% if user.username != User.username %}
+                {% if is_followed == True %}
+                 <form action="{% url 'unfollow_user' User.username %}" method="GET">
+                    <button class="follow-btn" type="submit">Unfollow</button>
+                </form>
+                {% else %}
+                 <form action="{% url 'follow_user' User.username %}" method="GET">
+                    <button class="follow-btn" type="submit">Follow</button>
+                </form>
+                {% endif %}
+                {% endif %}
+            </div>
+
+        </section>
+        <section class="ask-form-section">
+            <div class="ask-form-content">
+                {% if user.username == User.username %}
+                <p class="ask-form-label">ِAsk Yourself</p>
+                {% else %}
+                <p class="ask-form-label">ِAsk {{User.username}}</p>
+                {% endif %}
+                <form method="POST" action="{% url 'question_asked' User.username %}">
+                {% csrf_token %}
+                <input type="text" name="question" required placeholder="What,when,why... ask"><br/>
+                <div class="ask-form-margin">
+                    <input type="checkbox" name="anon" id=""><label for="">Ask anonymously</label>
+                    <button class="ask-btn" type="submit" 55>Ask</button>
+                </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

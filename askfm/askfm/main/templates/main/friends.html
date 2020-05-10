@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Friends | ASKfm</title>
+    <link rel="stylesheet" href="{% static 'main/friendstyle.css' %}" />
+  </head>
+  <body>
+    {% include "header.html" %}
+    <div class="container">
+      <h2>Your friends</h2>
+      <a href="#">
+        {% for friend in friends%}
+        <section class="friend">
+          <p class="name">{{ friend.user.name }}</p>
+          <p class="username">{{ friend.user.username }}</p>
+        </section>
+        {% endfor %}
+      </a>
+    </div>
+  </body>
+</html>
