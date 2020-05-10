@@ -157,3 +157,22 @@ input[type='text']::placeholder {
     display: flex;
     flex-flow: row nowrap;
 }
+.question{
+    font-weight: bold;
+}
+.answer{
+    padding-top: 3%;
+}
+.question_answer{
+    margin-top: -3%;
+    width:46%;
+    
+    height: fit-content;
+    background-color: #fff;
+    color:#2b3237;
+    margin-left: 10%;
+    margin-bottom: 4%;
+    padding:1% 1.5%;
+    border-radius: 5px;
+    border: solid 1px #4A4A50;
+}

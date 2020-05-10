@@ -73,8 +73,8 @@ input[type="text"] {
     line-height: 40px;
     width: 90%;
     margin-top: 1%;
-    border: dotted 1px #d5d5dd;
-    font-size: 0.8em;
+    border: solid 1px #d5d5dd;
+    font-size: 1em;
 }
 
 .checkbox-label {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{User.username}}</title>
-    <link rel="stylesheet" href="{% static 'main/homepagestyle.css' %}" ">
+    <link rel="stylesheet" href="{% static 'main/homepagestyle.css' %}" >
 </head>
 
 <body>
@@ -19,7 +19,7 @@
             </div>
             <div class="avatar-username">
                 <p class="username">{{User.username}}</p>
-                <p class="name">{{User.username}}</p>
+                <p class="name">{{User.name}}</p>
                 {% if user.username != User.username %}
                 {% if is_followed == True %}
                  <form action="{% url 'unfollow_user' User.username %}" method="GET">
@@ -51,6 +51,12 @@
                 </div>
             </div>
         </section>
+        {% for answer in answers %}
+         <section class="question_answer">
+            <p class="question">{{answer.question.question}}</p>
+            <p class="answer">{{answer.answer}}</p>
+        </section>   
+        {% endfor %}
     </div>
 </body>
 

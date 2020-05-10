@@ -1,0 +1,175 @@
+body {
+    box-sizing: border-box;
+    background-color: #2b3237;
+}
+
+*,
+:before,
+:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header-wrapper {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 9%;
+    background-color: #4A4A50;
+    border-bottom: solid 2px black;
+}
+
+.nav-wrapper a {
+    color: #cdcdd9;
+    text-decoration: none;
+    padding-left: 1%;
+}
+
+.nav-wrapper a:hover {
+    color: #ee4c22;
+}
+
+.nav-wrapper {
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.logout {
+    margin-left: 40%;
+}
+
+.container {
+    padding-top: 5%;
+    color: #fff;
+}
+
+.avatar {
+    border: solid 3px gray;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.avatar-username {
+    display: inline-block;
+    margin-left: 1%;
+    margin-top: 1%;
+    margin-left: 3%;
+}
+
+.profile-info {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.username {
+    font-size: 0.7em;
+    margin-bottom: 6%;
+}
+
+.name {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 5%;
+}
+
+.follow-btn {
+    color: #fff;
+    padding: 3% 15%;
+    background-color: gray;
+    border: solid 1px;
+    border-radius: 5px;
+}
+
+.follow-btn:hover {
+    background-color: #ee4c22;
+    cursor: pointer;
+}
+
+.ask-form-section {
+    border: solid 1px grey;
+    border-radius: 7px;
+    width: 46%;
+    height: 25vh;
+    margin: 5% 10%;
+}
+
+.ask-form-content {
+    padding-left: 3%;
+}
+
+.ask-form-label {
+    font-size: 1em;
+    font-weight: bold;
+    padding-top: 2%;
+}
+
+input[type='text'] {
+    height: 7vh;
+    width: 97%;
+    margin-top: 3%;
+    border-radius: 7px;
+    border-width: 1px;
+    resize: both;
+    font-size: 0.8em;
+    text-indent: 10px;
+}
+
+label {
+    font-size: 0.75em;
+}
+
+.ask-btn {
+    background-color: #ee4c22;
+    margin-left: 60%;
+    width: 15%;
+    height: 5vh;
+    border: solid 1px #FF643C;
+    color: #fff;
+    border-radius: 5px;
+    margin-left: 58%;
+}
+
+.ask-btn:hover {
+    background-color: #FF643C;
+}
+
+input[type='text']::placeholder {
+    text-indent: 10px;
+    font-size: 16px;
+}
+
+.ask-form-margin {
+    margin-top: 3%;
+}
+
+.profile-summary-container {
+    margin-left: 60%;
+    margin-top: -17%;
+    border: solid 1px black;
+    width: 25%;
+    height: 50vh
+}
+
+.profile-summary {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.question{
+    font-weight: bold;
+}
+.answer{
+    padding-top: 3%;
+}
+.question_answer{
+    width:40%;
+    height: fit-content;
+    background-color: #fff;
+    color:#2b3237;
+    margin-left: 10%;
+    padding:1% 1.5%;
+    border-radius: 5px;
+    border: solid 1px #4A4A50;
+}

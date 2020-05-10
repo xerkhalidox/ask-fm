@@ -20,8 +20,8 @@ class Question(models.Model):
     user_asked=models.ForeignKey(settings.AUTH_USER_MODEL,related_name='que_asked',on_delete=models.CASCADE)
 class Answer(models.Model):
     answer=models.TextField()
-    question_id=models.OneToOneField(Question,on_delete=models.CASCADE)
-    user_id=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    question=models.OneToOneField(Question,on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 class Follow(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     follower=models.ForeignKey(settings.AUTH_USER_MODEL,related_name="+",on_delete=models.CASCADE)

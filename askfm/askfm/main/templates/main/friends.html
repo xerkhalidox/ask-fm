@@ -11,8 +11,8 @@
     {% include "header.html" %}
     <div class="container">
       <h2>Your friends</h2>
-      <a href="#">
         {% for friend in friends%}
+        <a href="{% url 'homepage' friend.user.username %}">
         <section class="friend">
           <p class="name">{{ friend.user.name }}</p>
           <p class="username">{{ friend.user.username }}</p>

@@ -80,7 +80,9 @@ input::placeholder {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
+    font-size: 1em;
     line-height: 40px;
     width: 90%;
     margin-top: 1%;

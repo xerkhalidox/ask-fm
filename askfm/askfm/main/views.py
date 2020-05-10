@@ -20,8 +20,9 @@ def homepage(request, username):
         is_followed = False
     else:
         is_followed = True
+    answers=Answer.objects.filter(user=User)
     return render(
-        request, "main/homepage.html", {"User": User, "is_followed": is_followed}
+        request, "main/homepage.html", {"User": User, "is_followed": is_followed,"answers":answers}
     )
 
 
@@ -141,6 +142,6 @@ class answer_question(TemplateView):
         question = Question.objects.get(id=question_id)
         question.is_answered = 1
         question.save()
-        new_answer = Answer(answer=answer, question_id=question, user_id=request.user)
+        new_answer = Answer(answer=answer, question=question, user=request.user)
         new_answer.save()
         return HttpResponseRedirect(reverse("homepage", args=(request.user,)))
