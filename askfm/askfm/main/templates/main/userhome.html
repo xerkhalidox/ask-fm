@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed | ASKfm</title>
+    <link rel="stylesheet" href="{% static 'main/userhomestyle.css' %}" >
+</head>
+
+<body>
+    {% include "header.html" %}
+    <div class="container">
+        {% for answer in answers %}
+         <section class="question_answer">
+            <p class="question">{{answer.question.question}} <span><a href={% url 'homepage' answer.question.user_asks %}>{{answer.question.user_asks}}</a></span></p>
+            <p class="answer">{{answer.answer}}</p>
+        </section>   
+        {% endfor %}
+    </div>
+</body>
+
+</html>

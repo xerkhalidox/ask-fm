@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,16 +7,18 @@
     <title>Notifications | ASKfm</title>
     <link
       rel="stylesheet"
-      href="F:\ask-fm-master\askfm\askfm\main\static\main\notificationstyle.css"
+      href="{% static 'main/notificationstyle.css' %}"
     />
   </head>
   <body>
     {% include "header.html" %}
     <div class="container">
       <section class="notification">
-        <span class="username">username</span>
+     {% if request.session.answer %}
+        <span class="username">{{answer.user.username}}</span>
         answered your question
-        <span class="question">" Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis nesciunt ipsa, necessitatibus ex culpa deleniti quibusdam fuga facere esse. Exercitationem. "</span>
+        <span class="question">{{answer.question.question}}</span>
+      {% endif %}
       </section>
     </div>
   </body>

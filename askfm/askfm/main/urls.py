@@ -25,5 +25,5 @@ urlpatterns = [
         views.answer_question.as_view(),
         name="answer_question",
     ),
-
+    path("account/home", views.user_home, name="userhome"),
 ]

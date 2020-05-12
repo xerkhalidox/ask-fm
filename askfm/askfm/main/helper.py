@@ -1,4 +1,6 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+from .models import Answer,Question
 
 class helper_methods:
     def condition_checker(self,string,threshold1,threshold2):
@@ -45,6 +47,4 @@ class helper_methods:
         if(not check):
             errors.append(self.error_messages('password_length'))
         return errors
-        
-
-
+ 

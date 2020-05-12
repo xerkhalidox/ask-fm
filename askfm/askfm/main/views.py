@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from .models import Question, Follow, Answer
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from . import helper
 
 
@@ -20,9 +22,11 @@ def homepage(request, username):
         is_followed = False
     else:
         is_followed = True
-    answers=Answer.objects.filter(user=User)
+    answers = Answer.objects.filter(user=User)
     return render(
-        request, "main/homepage.html", {"User": User, "is_followed": is_followed,"answers":answers}
+        request,
+        "main/homepage.html",
+        {"User": User, "is_followed": is_followed, "answers": reversed(answers)},
     )
 
 
@@ -129,7 +133,7 @@ def get_friends(request):
 
 
 def get_notifications(request):
-    pass
+    return render(request, "main/notifications.html")
 
 
 class answer_question(TemplateView):
@@ -145,3 +149,11 @@ class answer_question(TemplateView):
         new_answer = Answer(answer=answer, question=question, user=request.user)
         new_answer.save()
         return HttpResponseRedirect(reverse("homepage", args=(request.user,)))
+
+
+def user_home(request):
+    friends=Follow.objects.filter(follower=request.user)
+    users=[friend.user for friend in friends]
+    users.append(request.user)
+    answers=Answer.objects.filter(user__in=users)
+    return render(request,"main/userhome.html",{'answers':reversed(answers)})
