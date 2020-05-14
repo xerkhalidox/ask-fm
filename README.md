@@ -6,7 +6,7 @@ Ask.fm is a social networking site where users create profiles and can send each
 * [Project status](#project-status)
 
 ## Dependencies
-* Django > 2.2
+* Django >= 2.2
 * pymysql
 ## Getting started
 Clone the project using this command
