@@ -4,12 +4,12 @@ from django.template import loader
 from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from .models import Question, Follow, Answer
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from .models import Question, Follow, Answer, Question_Notification, Answer_Notification
 from . import helper
 
 
@@ -26,7 +26,8 @@ def homepage(request, username):
     return render(
         request,
         "main/homepage.html",
-        {"User": User, "is_followed": is_followed, "answers": reversed(answers)},
+        {"User": User, "is_followed": is_followed,
+            "answers": reversed(answers)},
     )
 
 
@@ -88,7 +89,8 @@ def question_asked(request, username):
         unknown = True
     else:
         unknown = False
-    user_asks = get_object_or_404(get_user_model(), username=request.user.username)
+    user_asks = get_object_or_404(
+        get_user_model(), username=request.user.username)
     user_asked = get_object_or_404(get_user_model(), username=username)
     que = Question(
         question=request.POST["question"],
@@ -98,7 +100,13 @@ def question_asked(request, username):
         user_asked=user_asked,
     )
     que.save()
-    return HttpResponseRedirect("/" + username, {"username": username})
+    new_notification = Question_Notification(
+        user=user_asked,
+        question=que,
+        is_read=0
+    )
+    new_notification.save()
+    return HttpResponseRedirect("/" + username)
 
 
 def question_list(request):
@@ -133,7 +141,16 @@ def get_friends(request):
 
 
 def get_notifications(request):
-    return render(request, "main/notifications.html")
+    question_notifications=Question_Notification.objects.filter(user=request.user)
+    answer_notifications=Answer_Notification.objects.filter(user=request.user)
+    context={"questions":question_notifications,"answers":answer_notifications}
+    for notification in question_notifications:
+        notification.is_read=1
+        notification.save()
+    for notification in answer_notifications:
+        notification.is_read=1
+        notification.save()
+    return render(request, "main/notifications.html",context)
 
 
 class answer_question(TemplateView):
@@ -146,14 +163,24 @@ class answer_question(TemplateView):
         question = Question.objects.get(id=question_id)
         question.is_answered = 1
         question.save()
-        new_answer = Answer(answer=answer, question=question, user=request.user)
+        new_answer = Answer(
+            answer=answer, question=question, user=request.user)
         new_answer.save()
-        return HttpResponseRedirect(reverse("homepage", args=(request.user,)))
+        new_notification = Answer_Notification(
+            user=question.user_asks,
+            answer=new_answer,
+            is_read=0
+        )
+        new_notification.save()
+        return HttpResponseRedirect(reverse("homepage", args=(request.user,)), {"notification": 1})
 
 
 def user_home(request):
-    friends=Follow.objects.filter(follower=request.user)
-    users=[friend.user for friend in friends]
+    friends = Follow.objects.filter(follower=request.user)
+    users = [friend.user for friend in friends]
     users.append(request.user)
-    answers=Answer.objects.filter(user__in=users)
-    return render(request,"main/userhome.html",{'answers':reversed(answers)})
+    answers = Answer.objects.filter(user__in=users)
+    response = render(request, "main/userhome.html",
+                      {"answers": reversed(answers)})
+    response.http_test = 1
+    return response
