@@ -1,11 +1,15 @@
 # ask-fm
 Ask.fm is a social networking site where users create profiles and can send each other questions. It was once a form of anonymous social media that encouraged questions to be submitted anonymously.
 ## Table of contents
+* [Dependencies](#dependencies)
 * [Getting started](#getting-started)
 * [Project status](#project-status)
 
+## Dependencies
+* Django > 2.2
+* pymysql
 ## Getting started
-make sure you have django >= 2.2 installed and clone the project using this command
+Clone the project using this command
 ~~~ 
 git clone https://github.com/xerkhalidox/ask-fm.git
 ~~~
