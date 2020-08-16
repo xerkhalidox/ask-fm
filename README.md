@@ -50,4 +50,4 @@ and open  localhost:8000 on your browser
 - [x] Users can get list of his friends.
 - [x] Users have feed page to see recent answers of his friends.
 - [x] User will be notified when another user asks him or an answer he has asked was answered.
-- [ ] Automatic toxic answers and questions detection and deletion using machine learning.  
+  
